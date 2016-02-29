@@ -4,16 +4,17 @@
 #include <vector>
 
 #include "Player.h"
-#include "Hand.h"
+#include "Deque.h"
 
 class Game {
  private:
   std::vector<Player> players;
-  Hand hand;
+  Deque deque;
   int stakes;
  public:
   Game(std::vector<Player> players);
   void AddPlayer(Player p);
+  void PlayRound();
 };
 
 #endif

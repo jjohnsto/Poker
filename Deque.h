@@ -7,11 +7,11 @@
 
 class Deque {
  private:
-  std::deque<Card> Cards;
+  std::deque<Card> cards;
  public:
   Deque();
   void Reset();
-  void Suffle();
+  void Shuffle();
   Card Draw();
 };
 

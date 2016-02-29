@@ -7,7 +7,7 @@
 
 class Hand {
  private:
-  std::vector<Card> Cards;
+  
  public:
   Hand();
   void DrawFlop();
