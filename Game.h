@@ -3,18 +3,17 @@
 
 #include <vector>
 
-#include "Players.h"
+#include "Player.h"
 #include "Hand.h"
 
 class Game {
  private:
-  std::vector<Player> Players;
+  std::vector<Player> players;
   Hand hand;
   int stakes;
  public:
-  Game();
-  void AddPlayer();
-  
+  Game(std::vector<Player> players);
+  void AddPlayer(Player p);
 };
 
 #endif

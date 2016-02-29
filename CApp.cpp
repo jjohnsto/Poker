@@ -1,4 +1,9 @@
+#include <vector>
+
 #include "CApp.h"
+#include "Game.h"
+#include "Player.h"
+#include "Hand.h"
 
 CApp::CApp() {
 }
@@ -8,7 +13,13 @@ int CApp::OnExecute() {
 }
 
 int main() {
-  CApp theApp;
+  Player player1;
+  Player player2;
+  std::vector<Player> players;
+  players.push_back(player1);
+  players.push_back(player2);
+  
+  Game game(players);
 
-  return theApp.OnExecute();
+  return 0;
 }
