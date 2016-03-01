@@ -1,6 +1,10 @@
 #ifndef _CARD_H_
 #define _CARD_H_
 
+#include <string>
+#include <sstream>
+#include <iostream>
+
 enum Suite { SPADES, CLUBS, HEARTS, DIAMONDS };
 
 class Card {
@@ -10,6 +14,7 @@ class Card {
  public:
   Card();
   Card(int rank, Suite suite);
+  std::string ToString();
 };
 
 #endif
