@@ -29,13 +29,15 @@ std::string Card::ToString() {
   
   if(rank == 1)
     return "A" + csuite;
-  if(rank > 1 && rank < 11)
+  else if(rank > 1 && rank < 11)
     return toString(rank) + csuite;
-  if(rank == 11)
+  else if(rank == 11)
     return "J" + csuite;
-  if(rank == 12)
+  else if(rank == 12)
     return "Q" + csuite;
-  if(rank == 13)
+  else if(rank == 13)
     return "K" + csuite;
+  else
+    return "somethign fucked up";
 }
 

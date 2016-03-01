@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <iostream>
 #include "Game.h"
 
 Game::Game(std::vector<Player> players) {
@@ -41,11 +41,16 @@ int Game::StartBets(std::vector<Player> players, int startPos)
       char action;
       
       int p = (startPos + i) % players.size();
-      printf("Player %d\'s turn with cards: %s %s\n", p, "K", "k");
-      printf("Bet: %d, r to raise, c to check, f to fold, q to quit.\n", bet);
+      std::vector<Card> hand = players[p].GetHand();
+      std::string card1 = hand[0].ToString();
+      std::string card2 = hand[1].ToString();
+      std::cout << "Player " << p << "\'s turn with cards: " << card1 << " " << card2 << std::endl;
+      std::cout << "Bet: " << bet << ", r to raise, c to check, f to fold, q to quit.\n";
 
       scanf(" %c", &action);
       if(action == 'q')
-	return -1;
-     }
+      	return -1;
+      }
+
+  return stakes;
 }
