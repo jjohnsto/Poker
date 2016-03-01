@@ -21,5 +21,9 @@ int main() {
   
   Game game(players);
 
+  while(game.PlayRound()) {
+
+  }
+
   return 0;
 }

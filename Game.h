@@ -9,12 +9,14 @@
 class Game {
  private:
   std::vector<Player> players;
+  std::vector<Player> inGame;
   Deque deque;
   int stakes;
  public:
   Game(std::vector<Player> players);
   void AddPlayer(Player p);
-  void PlayRound();
+  bool PlayRound();
+  int StartBets(std::vector<Player> players, int startPos);
 };
 
 #endif
