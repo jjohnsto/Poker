@@ -12,7 +12,10 @@ class CApp {
 
   SDL_Window* window = NULL;
   SDL_Surface* surface = NULL;
+
+  /* Resources */
   SDL_Surface* image = NULL;
+  SDL_Surface* cardBitmaps[13];
  public:
   CApp();
 

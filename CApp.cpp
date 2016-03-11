@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 
 #include "CApp.h"
 #include "Game.h"
@@ -64,6 +65,21 @@ bool CApp::OnInit() {
     printf("Error: Surface not loaded. SDL_Error: %s\n", SDL_GetError());
     success = false;
   }
+
+  // load cards
+  for(int i=0; i<13; i++) {
+    std::string name = "Cards/s";
+    if(i<9)
+      name =  name + "0" + std::to_string(i+1) + ".bmp";
+    else
+      name = name + std::to_string(i+1) + ".bmp";
+    cardBitmaps[i] = SDL_LoadBMP(name.c_str());
+
+    if(cardBitmaps[i] == NULL) {
+      printf("Error: Card %s not loaded. SDL_Error: %s\n", name.c_str(), SDL_GetError());
+      success = false;
+    }
+  }
   
   return success;
 }
@@ -72,7 +88,7 @@ void CApp::OnLoop() {
 }
 
 void CApp::OnRender() {
-  SDL_BlitSurface(image, NULL, surface, NULL);
+  SDL_BlitSurface(cardBitmaps[0], NULL, surface, NULL);
   SDL_UpdateWindowSurface(window);
 }
 
