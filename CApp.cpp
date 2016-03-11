@@ -8,26 +8,83 @@
 CApp::CApp() {
 }
 
+void CApp::OnEvent(SDL_Event* event) {
+  if(event->type == SDL_QUIT)
+    running = false;
+}
+
 int CApp::OnExecute() {
+  running = true;
+ 
+  if(!OnInit()) {
+    return -1;
+  }
+
+  SDL_Event event;
+
+  while(running) {
+    while(SDL_PollEvent(&event)) {
+      OnEvent(&event);
+    }
+
+    OnLoop();
+    OnRender();
+  }
+
+  OnCleanup();
+  SDL_Quit();
+  
   return 0;
 }
 
-int main() {
-  Player player1;
-  Player player2;
-  Player player3;
-  Player player4;
-  std::vector<Player> players;
-  players.push_back(player1);
-  players.push_back(player2);
-  players.push_back(player3);
-  players.push_back(player4);
-  
-  Game game(players);
+bool CApp::OnInit() {
+  bool success = true;
 
-  while(game.PlayRound()) {
+  if(SDL_Init(SDL_INIT_VIDEO)<0)
+    {
+      printf("Error: Could not initialize SDL video. SDL_Error: %s\n", SDL_GetError());
+      success = false;
+    }
+  else
+    {
+      window = SDL_CreateWindow("Poker", SDL_WINDOWPOS_UNDEFINED,
+				SDL_WINDOWPOS_UNDEFINED, screenWidth,
+				screenHeight, SDL_WINDOW_SHOWN );
+      if(window==NULL) {
+	printf("Error: Window not created. SDL_Error: %s\n", SDL_GetError());
+	success = false;
+      }
+      else {
+	surface = SDL_GetWindowSurface(window);
+      }
+    }
 
+  image = SDL_LoadBMP("hello_world.bmp");
+  if(surface==NULL) {
+    printf("Error: Surface not loaded. SDL_Error: %s\n", SDL_GetError());
+    success = false;
   }
+  
+  return success;
+}
 
-  return 0;
+void CApp::OnLoop() {
+}
+
+void CApp::OnRender() {
+  SDL_BlitSurface(image, NULL, surface, NULL);
+  SDL_UpdateWindowSurface(window);
+}
+
+void CApp::OnCleanup() {
+  SDL_FreeSurface(image);
+  image = NULL;
+  SDL_DestroyWindow(window);
+  window = NULL;
+}
+
+int main() {
+  CApp app;
+
+  return app.OnExecute();
 }
